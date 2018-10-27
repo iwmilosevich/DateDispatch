@@ -3,42 +3,31 @@ package com.ivan.rest;
 import com.ivan.data.AccountList;
 import com.ivan.model.Account;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("/account")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class AccountService {
 
-    private final CopyOnWriteArrayList<Account> cList = AccountList.getInstance();
-
-    @GET
-    @Path("/all")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getAllAccounts() {
-        return "---Account List---\n"
-                + cList.stream()
-                .map(c -> c.toString())
-                .collect(Collectors.joining("\n"));
-    }
+    private final CopyOnWriteArrayList<Account> accounts = AccountList.getInstance();
 
     @GET
     @Path("{id}")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getAccount(@PathParam("id") long id) {
-        Optional<Account> match = cList.stream()
+    public Optional<Account> get(@PathParam("id") long id) {
+        return accounts.stream()
                 .filter(c -> c.getId() == id)
                 .findFirst();
+    }
 
-        if (match.isPresent()) {
-            return "---Customer---\n" + match.get().toString();
-        } else {
-            return "Customer not found";
-        }
+    @Path("all")
+    @GET
+    @Produces("application/json")
+    public List<Account> all() {
+        return accounts;
     }
 }

@@ -15,9 +15,7 @@ public class AccountList {
                         .firstName("George")
                         .lastName("Washington")
                         .email("gwash@example.com")
-                        .city("Mt Vernon")
-                        .state("VA")
-                        .birthday("1732-02-23")
+                        .address("11 Street Way")
                         .build()
         );
 
@@ -26,9 +24,7 @@ public class AccountList {
                         .firstName("John")
                         .lastName("Adams")
                         .email("jadams@example.com")
-                        .city("Braintree")
-                        .state("MA")
-                        .birthday("1735-10-30")
+                        .address("22 Park Way")
                         .build()
         );
 
@@ -37,9 +33,7 @@ public class AccountList {
                         .firstName("Thomas")
                         .lastName("Jefferson")
                         .email("tjeff@example.com")
-                        .city("CharlottesVille")
-                        .state("VA")
-                        .birthday("1743-04-13")
+                        .address("33 Board Walk")
                         .build()
         );
 
@@ -48,9 +42,7 @@ public class AccountList {
                         .firstName("James")
                         .lastName("Madison")
                         .email("jmad@example.com")
-                        .city("Orange")
-                        .state("VA")
-                        .birthday("1751-03-16")
+                        .address("44 Broad Way")
                         .build()
         );
 
@@ -59,9 +51,7 @@ public class AccountList {
                         .firstName("James")
                         .lastName("Monroe")
                         .email("jmo@example.com")
-                        .city("New York")
-                        .state("NY")
-                        .birthday("1758-04-28")
+                        .address("55 Street Corner")
                         .build()
         );
 
