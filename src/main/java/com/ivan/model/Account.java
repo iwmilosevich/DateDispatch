@@ -1,6 +1,8 @@
 package com.ivan.model;
 
-import java.util.concurrent.atomic.AtomicLong;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 
 public class Account {
     private final long id;
@@ -8,7 +10,6 @@ public class Account {
     private final String lastName;
     private final String email;
     private final String address;
-    private static final AtomicLong counter = new AtomicLong(100);
 
     private Account(AccountBuilder builder){
         this.id = builder.id;
@@ -19,7 +20,7 @@ public class Account {
     }
 
     public Account(){
-        Account account = new AccountBuilder().id().build();
+        Account account = new AccountBuilder().build();
         this.id = account.getId();
         this.firstName = account.getFirstName();
         this.lastName = account.getLastName();
@@ -30,7 +31,7 @@ public class Account {
     public Account(long id, String firstName, String lastName,
                     String email, String address){
         Account cust = new AccountBuilder()
-                .id()
+                .id(id)
                 .firstName(firstName)
                 .lastName(lastName)
                 .email(email)
@@ -72,17 +73,22 @@ public class Account {
                 + "Address: " + address;
     }
 
+    public JsonObject toJson(){
+        JsonObjectBuilder account = Json.createObjectBuilder();
+        return account.add("AccountId", this.id)
+                .add("FirstName", this.firstName)
+                .add("LastName", this.lastName)
+                .add("Email", this.email)
+                .add("Address", this.address)
+                .build();
+    }
+
     public static class AccountBuilder {
         private long id;
         private String firstName = "";
         private String lastName = "";
         private String email = "";
         private String address = "";
-
-        public AccountBuilder id(){
-            this.id = Account.counter.getAndIncrement();
-            return this;
-        }
 
         public AccountBuilder id(long id){
             this.id = id;

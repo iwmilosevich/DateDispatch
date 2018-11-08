@@ -1,11 +1,12 @@
 package com.ivan.rest;
 
-import com.ivan.data.AccountList;
+import com.ivan.database.Database;
 import com.ivan.model.Account;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -13,21 +14,37 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AccountService {
+    private Database db = new Database();
 
-    private final CopyOnWriteArrayList<Account> accounts = AccountList.getInstance();
+    public AccountService() throws Exception {}
 
     @GET
     @Path("{id}")
-    public Optional<Account> get(@PathParam("id") long id) {
-        return accounts.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst();
+    public Account get(@PathParam("id") long id) throws SQLException {
+        Statement statement = db.getConnect().createStatement();
+        ResultSet result = statement.executeQuery("select * from datedispatch.account where AccountId = " + String.valueOf(id));
+        result.first();
+        return new Account(
+                result.getLong("AccountId"),
+                result.getString("FirstName"),
+                result.getString("LastName"),
+                result.getString("Email"),
+                result.getString("Address")
+        );
     }
 
-    @Path("all")
-    @GET
-    @Produces("application/json")
-    public List<Account> all() {
-        return accounts;
+
+    @POST
+    @Path("")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Account post(Account account) throws SQLException {
+        PreparedStatement statement = db.getConnect().prepareStatement("insert into datedispatch.account values (default, ?, ?, ?, ?)");
+        statement.setString(1, account.getFirstName());
+        statement.setString(2, account.getLastName());
+        statement.setString(3, account.getEmail());
+        statement.setString(4, account.getAddress());
+        statement.executeUpdate();
+        return account;
     }
 }
