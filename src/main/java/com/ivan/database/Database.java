@@ -6,7 +6,7 @@ public class Database
 {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/datedispatch?user=user&password=pass";
+    static final String DB_URL = "jdbc:mysql://localhost/datedispatch?user=root&password=password";
 
     private Connection connect = null;
     private Statement statement = null;

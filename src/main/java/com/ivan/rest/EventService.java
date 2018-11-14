@@ -25,22 +25,29 @@ public class EventService {
         ResultSet result = statement.executeQuery("select * from datedispatch.event where EventId = " + String.valueOf(id));
         result.first();
         Event event = new Event();
-        event.setId(result.getLong("EventId"));
-        event.setName(result.getString("EventName"));
-        event.setDescription(result.getString("Description"));
+        event.setId(result.getLong("eventId"));
+        event.setName(result.getString("eventName"));
+        event.setDescription(result.getString("description"));
         return event;
+    }
+
+
+    @DELETE
+    @Path("{id}")
+    public void delete(@PathParam("id") long id) throws SQLException {
+        PreparedStatement statement = db.getConnect().prepareStatement("delete from datedispatch.event where eventId = "+ String.valueOf(id));
+        statement.execute();
     }
 
 
     @POST
     @Path("")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public Event post(Event event) throws SQLException {
         PreparedStatement statement = db.getConnect().prepareStatement("insert into datedispatch.event values (default, ?, ?)");
         statement.setString(1, event.getName());
         statement.setString(2, event.getDescription());
         statement.executeUpdate();
+        ResultSet result = statement.getResultSet();
         return event;
     }
 }
