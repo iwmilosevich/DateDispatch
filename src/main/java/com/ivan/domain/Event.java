@@ -1,15 +1,18 @@
-package com.ivan.model;
+package com.ivan.domain;
 
-public class Event {
-    long id;
-    String name;
-    String description;
+public class Event implements Identifiable
+{
+    private Long id;
+    private String name;
+    private String description;
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 

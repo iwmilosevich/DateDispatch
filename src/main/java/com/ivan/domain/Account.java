@@ -1,17 +1,20 @@
-package com.ivan.model;
+package com.ivan.domain;
 
-public class Account {
-    long id;
-    String firstName;
-    String lastName;
-    String email;
-    String address;
+public class Account implements Identifiable
+{
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String address;
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 
