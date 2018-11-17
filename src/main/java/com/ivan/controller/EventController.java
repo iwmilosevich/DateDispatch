@@ -1,10 +1,9 @@
 package com.ivan.controller;
 
 import com.ivan.domain.Event;
-import com.ivan.domain.Event;
 import com.ivan.repository.EventRepository;
 import com.ivan.resource.EventResource;
-import com.ivan.resource.EventResourceAssembler;
+import com.ivan.resource.assembler.EventResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;

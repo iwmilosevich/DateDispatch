@@ -1,13 +1,15 @@
-package com.ivan.resource;
+package com.ivan.resource.assembler;
 
-import com.ivan.domain.Event;
+import com.ivan.domain.Location;
+import com.ivan.resource.LocationResource;
+import com.ivan.resource.ResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EventResourceAssembler extends ResourceAssembler<Event, EventResource> {
+public class LocationResourceAssembler extends ResourceAssembler<Location, LocationResource> {
 
     @Autowired
     protected EntityLinks entityLinks;
@@ -16,11 +18,11 @@ public class EventResourceAssembler extends ResourceAssembler<Event, EventResour
     private static final String DELETE_REL = "delete";
 
     @Override
-    public EventResource toResource(Event event) {
+    public LocationResource toResource(Location location) {
 
-        EventResource resource = new EventResource(event);
+        LocationResource resource = new LocationResource(location);
 
-        final Link selfLink = entityLinks.linkToSingleResource(event);
+        final Link selfLink = entityLinks.linkToSingleResource(location);
 
         resource.add(selfLink.withSelfRel());
         resource.add(selfLink.withRel(UPDATE_REL));

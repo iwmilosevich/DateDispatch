@@ -1,10 +1,13 @@
 package com.ivan.domain;
 
+import java.util.Date;
+
 public class Event implements Identifiable
 {
     private Long id;
     private String name;
     private String description;
+    private Date date;
 
     @Override
     public Long getId() {
@@ -31,4 +34,8 @@ public class Event implements Identifiable
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Date getDate() { return date; }
+
+    public void setDate(Date date) { this.date = date; }
 }

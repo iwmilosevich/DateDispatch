@@ -3,7 +3,7 @@ package com.ivan.controller;
 import com.ivan.domain.Account;
 import com.ivan.repository.AccountRepository;
 import com.ivan.resource.AccountResource;
-import com.ivan.resource.AccountResourceAssembler;
+import com.ivan.resource.assembler.AccountResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;

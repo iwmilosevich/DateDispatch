@@ -1,6 +1,8 @@
-package com.ivan.resource;
+package com.ivan.resource.assembler;
 
 import com.ivan.domain.Account;
+import com.ivan.resource.AccountResource;
+import com.ivan.resource.ResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.Link;
